@@ -1,4 +1,5 @@
 gradio
+flask
 numpy
 matplotlib
 gunicorn 
