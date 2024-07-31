@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, render_template
 import gradio as gr
 import numpy as np
 import matplotlib.pyplot as plt
@@ -104,7 +104,6 @@ def plot_grid():
     plt.close(fig)
     return fig
 
-# Gradio interface function
 def gradio_interface(direction, reset=False):
     if reset:
         return reset_game(), "Game reset", False, False
@@ -128,11 +127,9 @@ gradio_app = gr.Interface(
     live=True
 )
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    # This will start the Gradio interface on the Flask server
-    gradio_app.launch(share=True, inbrowser=False)
-    return "Gradio interface launched!"
+    return gradio_app.launch(inbrowser=False, server_name="0.0.0.0", server_port=8080)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
