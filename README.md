@@ -1,16 +1,43 @@
-# 8x8_grid_game
+# 8x8 Grid Game
 
-A 8x8 Grid game where u can move your position to up, down, left, right depending on the 2 flags "Towards_life" and "Towards_death". 
+Welcome to the 8x8 Grid Game! The objective is to navigate through an 8x8 grid, moving up, down, left, or right, guided by the two flags "Towards_life" and "Towards_death". Your goal is to reach the hidden cell "F" (food) without getting caught in the cell "P" (poison).
 
-Goal is to reach the hidden cell "F" (food) and don't get caught in the cell "P" (Poison)
+## Game Description
 
-If you want to run this game on your PC perform the following commands in the terminal
+- **Goal**: Reach the hidden cell "F" (food) without landing on the cell "P" (poison).
+- **Movement**: You can move your position up, down, left, or right.
+- **Flags**:
+  - **Towards_life**: Indicates a move towards food.
+  - **Towards_death**: Indicates a move towards poison.
 
+## How to Run the Game
 
-1: git clone https://github.com/Ronin-117/8x8_grid_game
+Follow these steps to clone the repository, install dependencies, and run the game on your PC:
 
-2: cd 8x8_grid_game
+### Step 1: Clone the Repository
 
-3: pip install -r requirements.txt
+```sh
+git clone https://github.com/Ronin-117/8x8_grid_game
+```
 
-4: python run.py
+### Step 2: Navigate to the Repository Directory
+
+```sh
+cd 8x8_grid_game
+```
+
+### Step 3: Install Dependencies
+
+Make sure you have Python installed. Then, install the required dependencies using the command below:
+
+```sh
+pip install -r requirements.txt
+```
+
+### Step 4: Run the Game
+
+Start the game using the following command:
+
+```sh
+python run.py
+```
