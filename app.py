@@ -1,8 +1,11 @@
+from flask import Flask, request
 import gradio as gr
 import numpy as np
 import matplotlib.pyplot as plt
 import random
 import math
+
+app = Flask(__name__)
 
 # Initialize game state
 grid_size = 8
@@ -24,7 +27,6 @@ def reset_game():
     grid[poison_position[0], poison_position[1]] = 3  # Poison is represented by 3
     
     return plot_grid()
-
 
 # Place food and poison
 def place_food_poison(grid_size):
@@ -91,9 +93,9 @@ def plot_grid():
         for j in range(grid_size):
             if [i, j] == shape_position:
                 ax.text(j, i, 'S', ha="center", va="center", color="blue", fontsize=12)
-            elif [i, j] == food_position and [i, j] == shape_position:
+            elif [i, j] == food_position:
                 ax.text(j, i, 'F', ha="center", va="center", color="green", fontsize=12)
-            elif [i, j] == poison_position and [i, j] == shape_position:
+            elif [i, j] == poison_position:
                 ax.text(j, i, 'P', ha="center", va="center", color="red", fontsize=12)
     
     plt.xticks([])
@@ -102,9 +104,7 @@ def plot_grid():
     plt.close(fig)
     return fig
 
-
-
-# Update the existing Gradio interface
+# Gradio interface function
 def gradio_interface(direction, reset=False):
     if reset:
         return reset_game(), "Game reset", False, False
@@ -112,8 +112,8 @@ def gradio_interface(direction, reset=False):
     fig, result, towards_life, towards_death = move(direction)
     return fig, result, towards_life, towards_death
 
-# Create Gradio interface with a reset button
-interface = gr.Interface(
+# Create Gradio interface
+gradio_app = gr.Interface(
     fn=gradio_interface, 
     inputs=[
         gr.Radio(["up", "down", "left", "right"], label="Move Direction"),
@@ -128,5 +128,11 @@ interface = gr.Interface(
     live=True
 )
 
-interface.launch()
+@app.route("/", methods=["GET", "POST"])
+def index():
+    # This will start the Gradio interface on the Flask server
+    gradio_app.launch(share=True, inbrowser=False)
+    return "Gradio interface launched!"
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
