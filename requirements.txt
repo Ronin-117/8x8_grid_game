@@ -2,3 +2,4 @@ flask
 gradio
 numpy
 matplotlib
+gunicorn
