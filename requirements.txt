@@ -1,3 +1,4 @@
 gradio
 numpy
 matplotlib
+gunicorn 
